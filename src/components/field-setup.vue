@@ -15,10 +15,18 @@
       <v-notice v-if="interfaceName" color="gray" class="currently-selected">
         {{ $t("currently_selected", { thing: interfaces[interfaceName].name }) }}
       </v-notice>
-      <p v-else class="subtext">{{ $t("select_interface_below") }}</p>
-      <div>
+      <!-- <p v-else class="subtext">{{ $t("select_interface_below") }}</p> -->
+      <v-input
+        v-else
+        v-model="interfaceFilter"
+        type="text"
+        placeholder="Find an interface..."
+        class="interface-filter"
+        icon-left="search"
+      />
+      <div v-if="!interfaceFilter">
         <v-details
-          v-for="group in interfacesGrouped"
+          v-for="group in interfacesPopular"
           :key="group.title"
           :title="group.title"
           :open="true"
@@ -36,11 +44,30 @@
               </div>
               <div class="body">
                 <h2>{{ ext.name }}</h2>
-                <p>Core Interface</p>
+                <p>{{ interfaceSubtitles(ext) }}</p>
               </div>
             </article>
           </div>
         </v-details>
+      </div>
+      <div>
+        <div class="interfaces">
+          <article
+            v-for="ext in interfacesFiltered"
+            :key="'all-' + ext.id"
+            :class="{ active: interfaceName === ext.id }"
+            class="interface"
+            @click="setInterface(ext.id)"
+          >
+            <div class="header">
+              <v-icon :name="ext.icon || 'category'" size="48" color="white" />
+            </div>
+            <div class="body">
+              <h2>{{ ext.name }}</h2>
+              <p>{{ interfaceSubtitles(ext) }}</p>
+            </div>
+          </article>
+        </div>
       </div>
     </template>
 
@@ -559,6 +586,7 @@ export default {
       datatype: null,
       type: null,
       interfaceName: null,
+      interfaceFilter: null,
       options: {},
       translation: {},
       readonly: false,
@@ -637,7 +665,7 @@ export default {
     interfaces() {
       return Object.assign({}, this.$store.state.extensions.interfaces);
     },
-    interfacesGrouped() {
+    interfacesPopular() {
       const groups = [
         {
           title: this.$t("popular"),
@@ -645,80 +673,25 @@ export default {
             "text-input",
             "textarea",
             "wysiwyg",
-            "datetime",
-            "calendar",
             "toggle",
-            "file",
-            "many-to-one",
-            "one-to-many",
-            "primary-key",
-            "status",
-            "sort"
-          ]
-        },
-        {
-          title: this.$t("text"),
-          interfaces: [
-            "code",
-            "hashed",
-            "json",
-            "markdown",
-            "password",
-            "primary-key",
-            "slug",
-            "tags",
-            "text-input",
-            "textarea",
-            "wysiwyg",
-            "wysiwyg-full"
-          ]
-        },
-        {
-          title: this.$t("numeric"),
-          interfaces: ["numeric", "primary-key", "rating", "slider", "sort"]
-        },
-        {
-          title: this.$t("date_and_time"),
-          interfaces: [
-            "calendar",
-            "date",
-            "time",
             "datetime",
-            "datetime-created",
-            "datetime-updated"
-          ]
-        },
-        {
-          title: this.$t("relational"),
-          interfaces: [
-            "one-to-many",
-            "many-to-one",
-            "many-to-many",
-            "translation",
+            "calendar",
             "file",
-            "files",
-            "checkboxes-relational"
+            "many-to-one"
           ]
         }
       ];
-
-      groups.push({
-        title: this.$t("other"),
-        interfaces: Object.keys(this.interfaces).filter(name => {
-          let inUse = false;
-
-          groups.forEach(group => {
-            if (group.interfaces.includes(name)) inUse = true;
-          });
-
-          return inUse === false;
-        })
-      });
 
       return groups.map(group => ({
         ...group,
         interfaces: group.interfaces.map(name => this.interfaces[name])
       }));
+    },
+    interfacesFiltered() {
+      if (!this.interfaceFilter) return this.interfaces;
+      return Object.keys(this.interfaces)
+        .filter(interfaceName => interfaceName.includes(this.interfaceFilter))
+        .map(interfaceName => ({ ...this.interfaces[interfaceName] }));
     },
     databaseVendor() {
       return this.$store.state.serverInfo.databaseVendor;
@@ -1063,6 +1036,18 @@ export default {
     this.activeTab = this.existing ? "schema" : "interface";
   },
   methods: {
+    interfaceSubtitles(ext) {
+      if (ext.types) {
+        return this.$helpers.formatTitle(ext.types[0]);
+      } else {
+        return "String";
+      }
+      // if(ext.options){
+      //   return (Object.keys(ext.options).length > 0) ? Object.keys(ext.options).length + " Options" : "No Options";
+      // } else {
+      //   return "No Options";
+      // }
+    },
     nextTab() {
       if (this.existing && this.activeTab === "interface") {
         this.initRelation();
@@ -1518,6 +1503,10 @@ p {
 }
 
 .currently-selected {
+  margin-bottom: 40px;
+}
+
+.interface-filter {
   margin-bottom: 40px;
 }
 
