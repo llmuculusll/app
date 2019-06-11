@@ -1042,11 +1042,6 @@ export default {
       } else {
         return "String";
       }
-      // if(ext.options){
-      //   return (Object.keys(ext.options).length > 0) ? Object.keys(ext.options).length + " Options" : "No Options";
-      // } else {
-      //   return "No Options";
-      // }
     },
     nextTab() {
       if (this.existing && this.activeTab === "interface") {
