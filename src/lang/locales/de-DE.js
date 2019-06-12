@@ -47,7 +47,6 @@ export default {
   bookmark_global: "Global: Alle Benutzer",
   bookmark_personal: "Persönlich: Nur meine",
   bookmark_role: "Rolle: {role}",
-  bookmark_select_visibility: "Sichtbarkeit des Lesezeichens auswählen:",
   bookmarks: "Lesezeichen",
   both: "Beide",
   cancel: "Abbrechen",

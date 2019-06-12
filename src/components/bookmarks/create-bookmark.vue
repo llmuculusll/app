@@ -6,7 +6,6 @@
     @confirm="saveBookmark"
   >
     <div v-if="isUserAdmin" class="create-options">
-      <div class="create-label">{{ $t("bookmark_select_visibility") }}</div>
       <v-select
         :options="bookmarkOptions"
         :value="bookmarkType"
@@ -30,8 +29,8 @@ export default {
   data() {
     return {
       bookmarkOptions: {
-        personal: this.$t("bookmark_personal"),
-        global: this.$t("bookmark_global")
+        global: this.$t("bookmark_global"),
+        personal: this.$t("bookmark_personal")
       },
       bookmarkTitle: "",
       bookmarkType: "personal",
@@ -121,9 +120,5 @@ export default {
 <style lang="scss" scoped>
 .create-options {
   margin-top: 2rem;
-}
-.create-label {
-  font-size: 14px;
-  margin-bottom: 1rem;
 }
 </style>

@@ -47,7 +47,6 @@ export default {
   bookmark_global: "Globalna: Wszyscy użytkownicy",
   bookmark_personal: "Własna: Tylko ja",
   bookmark_role: "Rola: {role}",
-  bookmark_select_visibility: "Wybierz poziom widoczności zakładki:",
   bookmarks: "Zakładki",
   both: "Oba",
   cancel: "Anuluj",

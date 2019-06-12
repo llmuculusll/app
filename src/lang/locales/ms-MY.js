@@ -46,7 +46,6 @@ export default {
   bookmark_global: "Global: Semua Pengguna",
   bookmark_personal: "Peribadi: Hanya Saya",
   bookmark_role: "Peranan: {role}",
-  bookmark_select_visibility: "Pilih keterlihatan penandabuku:",
   bookmarks: "Penandabuku",
   both: "Kedua-duanya",
   cancel: "Batal",

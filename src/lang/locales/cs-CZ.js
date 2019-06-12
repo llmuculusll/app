@@ -47,7 +47,6 @@ export default {
   bookmark_global: "Globální: Všichni uživatelé",
   bookmark_personal: "Osobní: Jen já",
   bookmark_role: "Role: {role}",
-  bookmark_select_visibility: "Zvolte viditelnost záložky:",
   bookmarks: "Záložky",
   both: "Vše",
   cancel: "Zrušit",
