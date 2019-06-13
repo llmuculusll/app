@@ -55,6 +55,11 @@
         ],
         [
           {
+            "label": "$t:train",
+            "icon": "train",
+            "value": "train"
+          },
+          {
             "label": "$t:bus",
             "icon": "directions_bus",
             "value": "bus"
@@ -65,19 +70,16 @@
             "value": "car"
           },
           {
-            "label": "$t:bike",
             "icon": "directions_bike",
             "value": "bike"
           },
           {
-            "label": "Run",
             "icon": "directions_run",
             "value": "run"
           },
           {
-            "label": "Sleep",
-            "label": "$t:sleep",
-            "value": "sleep"
+            "label": "$t:other",
+            "value": "other"
           }
         ]
       ]
@@ -113,6 +115,11 @@
       "value": "Value",
       "flight": "Flight",
       "cruise": "Cruise",
+      "run": "Run",
+      "bus": "Bus",
+      "bike": "Bike",
+      "train": "Train",
+      "car": "Car",
       "other": "Other"
     },
 	"fr-FR": {
@@ -126,9 +133,10 @@
       "car": "Voiture",
       "bike": "Vélo",
       "bus": "Bus",
-      "sleep": "Dormir",
+      "train": "Train",
       "flight": "Vol",
-      "cruise": "Croisière"
+      "cruise": "Croisière",
+      "other": "Autre"
     }
   }
 }

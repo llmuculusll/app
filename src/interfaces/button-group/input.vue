@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="options.theme ? `button-group-${options.theme}` : 'button-group-outline'"
+    :class="options.theme ? `button-group-${options.theme}` : 'button-group-solid'"
     class="interface-button-group"
   >
     <div
@@ -62,6 +62,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.interface-button-group {
+  font-weight: 500;
+}
 /*
 Theme: Outline
 */
@@ -203,7 +206,6 @@ Theme: Solid | Default
 .button-group-solid {
   .button-group-button {
     border-top: none;
-    // border-right-color: var(--gray);
     border-right: none;
     border-bottom: none;
     border-left: none;
@@ -211,8 +213,7 @@ Theme: Solid | Default
     background-color: var(--lightest-gray);
     color: var(--dark-gray);
     &:hover {
-      background-color: var(--light-gray);
-      color: var(--white);
+      background-color: var(--blue-grey-100);
     }
   }
 
@@ -223,13 +224,13 @@ Theme: Solid | Default
 			*/
       &:focus {
         + .button-group-button {
-          background-color: var(--dark-gray);
+          background-color: var(--darker-gray);
           color: var(--white);
         }
       }
       &:checked {
         + .button-group-button {
-          background-color: var(--dark-gray);
+          background-color: var(--darker-gray);
           color: var(--white);
         }
       }
